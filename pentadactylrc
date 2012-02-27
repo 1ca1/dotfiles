@@ -1,0 +1,76 @@
+" .pentadactylrc - Matt Sacks
+
+set mapleader=","
+
+"{{{ Options
+set novb
+set defsearch=!
+set newtab=all
+set urlseparator=",,"
+set hintkeys='asdfjlk;'
+hi Hint -a text-transform: uppercase;
+"set strictfocus=*:laissez-faire
+"set passunknown=base
+set complete=l
+colorscheme malfoy
+set history=500
+set guioptions-=r
+
+" change editor
+set editor='/usr/local/bin/mvim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+"}}}
+
+"{{{ PassKeys
+set passkeys+=mail.google.com:c/jkhnpovuelxsfra#`[]z?*nrtgidIU+-=<Tab>
+set passkeys+='mail.google.com/tasks/canvas':<Tab><S-Tab>
+set passkeys+='groups.google.com/forum':glmo<Enter>j<S-j>k<S-k>n<S-n>p<S-p>ufh<S-a>rc/?<Esc>
+set passkeys+='http://www.google.com/reader/*':jkvnpbumoaAXNOVPJK?gehtl
+set passkeys+=twitter.com:jk<Space>/.frtmn?ghrpu
+set passkeys+='rememberthemilk\.com/home/m':trsjkdhyucpgfinalez1234
+set passkeys+='www.google.com/calendar':dwmxajkcnqetp?<Del>s12345
+set passkeys+=duckduckgo.com/:\!l'o<C-Return>jkh<Esc>\'v/rs1
+set passkeys+=simple.com:sjkcmS$<Esc>
+"}}}
+
+"{{{ Shortcuts
+map <Leader>r :o read<CR>
+map <Leader>in :o insta<CR>
+map <Leader>ib :o instab<CR>
+map <Leader>il :o instalong<CR>
+map <Leader>e :tabopen!
+map K :o g
+map <Leader>s :tabopen g
+map <Leader>S :tabopen! g
+map <Leader>d :open ddg
+map <Leader>D :tabopen ddg
+map <C-l> :noh<CR>
+
+cnoremap <C-r> <C-a><A-Right> g<C-e>
+cnoremap <C-g> <C-a><A-Right> d<C-e>
+
+nmap <leader>z -js window.content.document.toggleImageSize();
+"}}}
+
+"{{{ Navigation
+nno j 5j
+nno k 5k
+map <M-S-C> gt
+map <M-S-X> gT
+nno <C-e> 10<C-e>
+nno <C-y> 10<C-y>
+cno <C-P> <Up>
+cno <C-N> <Down>
+cno <C-b> <Left>
+cno <C-f> <Right>
+ino <C-b> <Left>
+ino <C-f> <Right>
+ino <C-p> <Up>
+ino <C-n> <Down>
+map ,, <C-^>
+
+nno <C-1> -ex firebug toggle
+nno <C-2> -ex firebug inspect
+nno <C-3> -ex firebug console-focus
+"}}}
+
+" vim:ft=vim:

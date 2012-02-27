@@ -1,0 +1,5 @@
+Do the following to install: 
+
+ln -s zshrc ~/.zshrc
+ln -s zsh  ~/.zsh  # yes, symlink the directory
+chsh /bin/zsh      # i think...

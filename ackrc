@@ -1,0 +1,10 @@
+--sort-files
+
+--type-add=ruby=haml
+--type-add=vim=vimrc
+--type-add=js=json
+--type-add=css=scss,sass
+--type-set=MARKDOWN=md,mkd,markdown
+--type-set=COFFEE=coffee
+
+--ignore-dir=vendor
