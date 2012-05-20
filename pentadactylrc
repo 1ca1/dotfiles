@@ -1,6 +1,6 @@
 " .pentadactylrc - Matt Sacks
 
-set mapleader=","
+map , <Leader>
 
 "{{{ Options
 set novb
@@ -37,40 +37,38 @@ map <Leader>r :o read<CR>
 map <Leader>in :o insta<CR>
 map <Leader>ib :o instab<CR>
 map <Leader>il :o instalong<CR>
-map <Leader>e :tabopen!
+map <Leader>e :tabopen!<Space>
 map K :o g
-map <Leader>s :tabopen g
-map <Leader>S :tabopen! g
 map <Leader>d :open ddg
 map <Leader>D :tabopen ddg
 map <C-l> :noh<CR>
 
-cnoremap <C-r> <C-a><A-Right> g<C-e>
-cnoremap <C-g> <C-a><A-Right> d<C-e>
+cmap <C-r> <C-a><A-Right> g<C-e>
+cmap <C-g> <C-a><A-Right> d<C-e>
 
 nmap <leader>z -js window.content.document.toggleImageSize();
 "}}}
 
 "{{{ Navigation
-nno j 5j
-nno k 5k
 map <M-S-C> gt
 map <M-S-X> gT
-nno <C-e> 10<C-e>
-nno <C-y> 10<C-y>
-cno <C-P> <Up>
-cno <C-N> <Down>
-cno <C-b> <Left>
-cno <C-f> <Right>
-ino <C-b> <Left>
-ino <C-f> <Right>
-ino <C-p> <Up>
-ino <C-n> <Down>
+nmap -builtin j 5j
+nmap -builtin k 5k
+nmap -builtin <C-e> 10<C-e>
+nmap -builtin <C-y> 10<C-y>
+cmap -builtin <C-P> <Up>
+cmap -builtin <C-N> <Down>
+cmap -builtin <C-b> <Left>
+cmap -builtin <C-f> <Right>
+imap -builtin <C-b> <Left>
+imap -builtin <C-f> <Right>
+imap -builtin <C-p> <Up>
+imap -builtin <C-n> <Down>
 map ,, <C-^>
 
-nno <C-1> -ex firebug toggle
-nno <C-2> -ex firebug inspect
-nno <C-3> -ex firebug console-focus
+nmap <C-1> -ex firebug toggle
+nmap <C-2> -ex firebug inspect
+nmap <C-3> -ex firebug console-focus
 "}}}
 
 " vim:ft=vim:

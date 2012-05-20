@@ -19,7 +19,6 @@ set shiftwidth=4
 set shiftround
 set smarttab
 set expandtab
-set shiftround
 
 "   Tabline {{{2
 "   by default this is non-gui
@@ -105,8 +104,6 @@ set switchbuf=usetab  " use an already existing window for buffers
 
 nnoremap 0 ^
 nnoremap Y y$
-nnoremap H ^
-nnoremap L $
 nnoremap K <NOP>
 
 " Scroll viewport a bit quicker
@@ -129,7 +126,7 @@ if has("gui_running")
     autocmd!
     autocmd GuiEnter *
           \  set background=dark
-          \| colorscheme solarized
+          \| colorscheme eddie
           \| set lines=200 columns=100
           \| nnoremap <C-S> :w<CR>
           \| nnoremap <C-Q> :q<CR>
@@ -138,8 +135,8 @@ if has("gui_running")
           \| nnoremap <C-W><C-Q> <C-W>q
           \| set guioptions=gm
           \| let &guifont= has("MacUnix") ?
-            \ "Liberation\ Mono:h12" :
-            \ "DejaVu\ Sans\ Mono\ 10"
+            \ "Liberation\ Mono:h15" :
+            \ "DejaVu\ Sans\ Mono\ 12"
           \| set t_Co=256
           \| endif
   augroup END
@@ -182,6 +179,7 @@ set nostartofline        " don't move cursor to the BOL when jumping
 set foldmethod=marker    " default foldmethod is marker
 set history=1000         " make the history longer
 set linespace=2          " give lines some breathing room
+set tags+=.git/tags     " look in the git directory for git-hook generated tags
 
 " make grep always recursive and case-insensitive
 set grepprg=grep\ -inr\ $*\ /dev/null\
@@ -290,6 +288,9 @@ command! -complete=file -nargs=* Grep :exec 'grep <args>' | copen | wincmd K
 
 " makes the file writable
 command! -nargs=0 Writeable :setl noro modifiable
+
+" fixes solarized shit when changing colorschemes
+command! -nargs=1 FixSolarized vsplit | Ve syn/<args> | %s/^\(\s\{-}\)\%(HiLink\|hi def link\)/\1hi link/g | w | wincmd l | e! % | wincmd h | u | wq
 "}}}
 
 " Plugins {{{1
@@ -314,22 +315,6 @@ call fuzzee#map(',js', 'javascript')
 call fuzzee#map(',cs', 'css')
 call fuzzee#map(',so', 'Source')
 call fuzzee#map(',sp', 'Specs/spec')
-
-" CoffeeTags
-let g:tagbar_type_coffee = {
-\ 'kinds' : [
-\   'f:functions',
-  \   'o:object'
-  \ ],
-  \ 'kind2scope' : {
-  \  'f' : 'object',
-  \   'o' : 'object'
-  \},
-  \ 'sro' : ".",
-  \ 'ctagsbin' : 'coffeetags',
-  \ 'ctagsargs' : '--include-vars ',
-  \}
-
 " }}}1
 
 " {{{ Filetypes
@@ -442,6 +427,20 @@ augroup CSS
   au FileType css,sass,scss setl sw=2
 augroup END
 
+" Git
+augroup Git
+  autocmd!
+  autocmd FileType git set fdm=syntax
+  " fold each file in a gitcommit used with the -v flag
+  autocmd FileType gitcommit
+        \ set fdm=expr foldexpr=getline(v:lnum)=~'^diff\\s--git'?'>1':'='
+  " view the output of `git diff` in a vertical split
+  command! -nargs=0 Gddiff
+        \ vnew | exec "r!git diff" | set ft=git
+  " git status in a vertical split
+  command! -nargs=0 Gsv Gst | wincmd H
+augroup END
+
 " Webdev {{{
 augroup Webdev
   autocmd!
@@ -451,8 +450,6 @@ augroup Webdev
         \ getline('.')[col('.')-1] == ';' ? "\<Right>" : ";"
   autocmd FileType css,javascript,scss,sass
         \ inoremap <buffer> <C-l> {<CR>}<C-o>O
-  autocmd FileType javascript inoremap <buffer>
-        \ <C-L> {<CR>})<C-o>O
 
   " make one-line if statements into multiline ones {{{
   function! s:MakeMultiline()

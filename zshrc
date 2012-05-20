@@ -2,7 +2,7 @@ export ZSH=$HOME/.zsh
 
 export ZSH_THEME="muse"
 
-plugins=(git vi-mode ruby github gem osx \
+plugins=(git ruby github gem osx \
          cake cloudapp npm lol)
 
 source $ZSH/zsh.sh

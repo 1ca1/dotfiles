@@ -6,5 +6,6 @@ bindkey "^F" forward-char
 bindkey "^B" backward-char
 bindkey "^P" up-line-or-history
 bindkey "^N" down-line-or-history
-bindkey "^D" vi-cmd-mode
+bindkey "^V" vi-cmd-mode
 bindkey -M viins -r '^['
+bindkey -M vicmd v edit-command-line

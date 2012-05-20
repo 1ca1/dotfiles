@@ -1,0 +1,21 @@
+[user]
+        name = Matt Sacks
+        email = matt.s.sacks@gmail.com
+
+[color]
+        ui = auto
+
+[core]
+        editor = vim
+
+[merge]
+        tool = vimdiff
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+
+[init]
+	templatedir = ~/.git_template
+
+[alias]
+	ctags = !.git/hooks/ctags
